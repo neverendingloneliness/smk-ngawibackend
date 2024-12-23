@@ -15,6 +15,7 @@ class Pendaftaran extends Model
 
     protected $fillable = [
         'user_id',
+        'wali_id',
         'jurusan_id',
         'tanggal_pendafaran',
         'status_pendaftaran',

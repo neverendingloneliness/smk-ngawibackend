@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use illuminate\Support\Str;
 
 class Wali extends Model
 {
@@ -14,25 +13,15 @@ class Wali extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'nama_wali',
-        'slug_wali',
-        'nomor_telepon',
+        'nomor_tepon_wali',
         'pekerjaan',
         'alamat'
     ];
 
-    public function getRouteKeyName() {
-        return 'slug_wali' ;
-    }
-
-    public function setNamaWaliAttribute($value){
-        $this->attributes['nama_wali'] = $value;
-        $this->attributes['slug_wali'] = Str::slug($value);
-    }
-
-    
-    public function user(): HasMany
+    public function wali(): BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

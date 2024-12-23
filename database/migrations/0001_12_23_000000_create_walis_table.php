@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('walis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_wali')->unique();
-            $table->string('slug_wali')->unique();
-            $table->string('nomor_telepon');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('nama_wali');
+            $table->string('nomor_tepon_wali');
             $table->string('pekerjaan');
             $table->text('alamat');
             $table->timestamps();

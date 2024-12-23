@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('wali_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -22,6 +21,8 @@ return new class extends Migration
             $table->string('nomor_telepon');
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['laki - laki', 'perempuan']);
+            $table->string('asal_sekolah');
+            $table->foreignId('jurusan_id')->constrained()->onDelete('cascade');
             $table->text('alamat');
             $table->enum('role', ['student', 'admin'])->default('student');
             $table->rememberToken();
