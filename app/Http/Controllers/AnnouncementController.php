@@ -27,21 +27,38 @@ class AnnouncementController extends Controller
 
     public function store(Request $request):JsonResponse{
         $valdata = $request->validate([
-            'pendaftaran_id' => 'required|exists:pendaftarans,column',
-            'tanggal_pengunguman' => now(),
-            'hasil_seleksi'
+            'pendaftaran_id' => 'required|exists:pendaftarans,id',
+            'hasil_seleksi' => 'required|in:diterima,ditolak'
+        ]);
+
+        $announcement = Announcement::create([
+            ...$valdata,
+            'tanggal_pengunguman' => now()
         ]);
         
         return response()->json([
-
+            'success' => true,
+            'message' => 'Announcement Created Successfully',
+            'data' => $announcement
         ]);
     }
 
-    public function update():JsonResponse{
+    public function update(Request $request,Announcement $announcement ):JsonResponse{
+        
+        $validated = $request->validate([
+            'hasil_seleksi' => 'required|in:diterima,ditolak'
+        ]);
 
+        $announcement->update($validated);
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Announcement Updated Successfully',
+            'data' => $announcement
+        ]);
     }
 
-    public function delete():JsonResponse{
+    public function destroy():JsonResponse{
         return response()->json([
 
         ]);

@@ -26,22 +26,25 @@ class PendaftaranController extends Controller
     }
 
     public function store(Request $request):JsonResponse{
-        $valdata = $request->validate([
+        $validated = $request->validate([
+            'wali_id' => ['required', 'exists:walis,id'],
+            'jurusan_id' => ['required', 'exists:jurusans,id'],
+        ]);
+    
+        $pendaftaran = Pendaftaran::create([
+            ...$validated,
             'user_id' => auth()->id(),
-            'wali_id' => auth()->user()->wali_id,
-            'jurusan_id' => auth()->user()->jurusan_id ?? null,
             'tanggal_pendaftaran' => now(),
             'status_pendaftaran' => 'dalam proses'
         ]);
 
-        $pendaftaran = Pendaftaran::create($valdata);
         return response()->json([
             'success' => true,
             'message' => 'Pendaftaran Created Successfully',
             'data' => $pendaftaran
         ]);
     }    
-    public function delete(Pendaftaran $pendaftaran):JsonResponse{
+    public function destroy(Pendaftaran $pendaftaran):JsonResponse{
         
         $pendaftaran->delete();
 

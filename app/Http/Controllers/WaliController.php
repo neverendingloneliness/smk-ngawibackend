@@ -57,12 +57,12 @@ class WaliController extends Controller
         $wali->update($valdata);
         return response()->json([
             'success' => true,
-            'message' => 'Wali Updated Successfully',
-            'data' => $wali
+            'message' =>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                'Wali Updated Successfully',
+            'data' => $wali                             
         ]);
     }
 
-    public function delete(Wali $wali):JsonResponse{
+    public function destroy(Wali $wali):JsonResponse{
         $wali->delete();
 
         return response()->json([

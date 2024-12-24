@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
             'tanggal_lahir'=> ['required', 'date'],
             'jenis_kelamin'=> ['required', 'in:laki-laki,perempuan'],
             'asal_sekolah' => ['required', 'string', 'max:255'],
-            'alamat'=> ['required', 'text'],
+            'alamat'=> ['required', 'string'],
         ]);
 
         $user = User::create([

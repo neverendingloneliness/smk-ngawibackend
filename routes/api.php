@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JurusanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,4 +12,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     ]);
 });
 
+Route::resource('jurusan', JurusanController::class)
+->only('index', 'show', 'store', 'updateJurusan', 'destroy');
+Route::put('/jurusan/{jurusan}',[JurusanController::class, 'update']);
+
+
+
 require __DIR__.'/auth.php';
+
+

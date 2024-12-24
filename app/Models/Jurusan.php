@@ -12,7 +12,7 @@ use illuminate\Support\Str;
 class Jurusan extends Model
 {
     /** @use HasFactory<\Database\Factories\JurusanFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'nama_jurusan',
@@ -25,11 +25,10 @@ class Jurusan extends Model
     }
 
     public function setNamaJurusanAttribute($value){
-        $this->attributes['nama_wali'] = $value;
+        $this->attributes['nama_jurusan'] = $value;
         $this->attributes['slug_jurusan'] = Str::slug($value);
 
     }
-
     
     public function pendaftaran(): HasMany
     {

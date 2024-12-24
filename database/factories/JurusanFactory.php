@@ -17,7 +17,7 @@ class JurusanFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama_jurusan',
         ];
     }
 }
