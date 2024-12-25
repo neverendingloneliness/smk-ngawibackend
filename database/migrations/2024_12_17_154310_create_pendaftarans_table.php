@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('pendaftarans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('wali_id')->constrained()->onDelete('cascade');
             $table->foreignId('jurusan_id')->constrained()->onDelete('cascade');
             $table->timestamp('tanggal_pendafaran');
             $table->enum('status_pendaftaran', ['diterima', 'ditolak', 'dalam proses'])->default('dalam proses');

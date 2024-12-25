@@ -27,7 +27,6 @@ class PendaftaranController extends Controller
 
     public function store(Request $request):JsonResponse{
         $validated = $request->validate([
-            'wali_id' => ['required', 'exists:walis,id'],
             'jurusan_id' => ['required', 'exists:jurusans,id'],
         ]);
     

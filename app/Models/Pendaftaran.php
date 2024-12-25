@@ -11,11 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Pendaftaran extends Model
 {
     /** @use HasFactory<\Database\Factories\PendaftaranFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'wali_id',
         'jurusan_id',
         'tanggal_pendafaran',
         'status_pendaftaran',

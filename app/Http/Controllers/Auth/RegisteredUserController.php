@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
             'nama_lengkap' => ['required', 'string', 'max:255'],
             'nomor_telepon'=> ['required', 'string', 'max:255'],
             'tanggal_lahir'=> ['required', 'date'],
-            'jenis_kelamin'=> ['required', 'in:laki-laki,perempuan'],
+            'jenis_kelamin'=> ['required', 'in:laki - laki,perempuan'],
             'asal_sekolah' => ['required', 'string', 'max:255'],
             'alamat'=> ['required', 'string'],
         ]);
@@ -49,13 +49,23 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        $pendaftaran = \App\Models\Pendaftaran::create([
+            'user_id' => $user->id,
+            'jurusan_id' => $request->jurusan_id,
+            'tanggal_pendaftaran' => now(),
+            'status_pendaftaran' => 'dalam proses',
+        ]);
+
         Auth::login($user);
         $user['token'] = $request->user()->createToken('auth')->plainTextToken;
 
         return response()->json([
             'success' => true,
             'message' => 'sign up success',
-            'data' => $user
+            'data' =>[
+                $user,
+                $pendaftaran  
+            ]
         ]);
     }
 }
